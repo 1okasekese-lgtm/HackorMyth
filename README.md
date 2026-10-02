@@ -9,4 +9,5 @@ The application features 15 questions about security, privacy, shortcuts and eve
 
 Question being answered: 
 
-![Uploading image.png…]()
+<img width="738" height="1599" alt="image" src="https://github.com/user-attachments/assets/6d9bf38a-7332-46f4-a57c-9e390a80e6aa" />
+
