@@ -14,3 +14,5 @@ Question being answered:
 Results Screen:
 
 <img width="353" height="617" alt="image" src="https://github.com/user-attachments/assets/688522fc-60c5-41b7-a868-bb979f9f0516" />
+
+The project is stored on a GitHub repository, so every change is saved a commit, and I can go back through the history is something ever goes wrong. GitHub also works as a backup and makes it easy to share. GitHub actions workflow has also been setup is that whenever i push my code, an automatic test runs and builds the code. 
