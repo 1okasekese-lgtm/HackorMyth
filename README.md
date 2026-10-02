@@ -11,3 +11,6 @@ Question being answered:
 
 <img width="353" height="617" alt="image" src="https://github.com/user-attachments/assets/6d9bf38a-7332-46f4-a57c-9e390a80e6aa" />
 
+Results Screen:
+
+<img width="738" height="1599" alt="image" src="https://github.com/user-attachments/assets/688522fc-60c5-41b7-a868-bb979f9f0516" />
