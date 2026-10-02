@@ -18,10 +18,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.tooling.preview.Preview
 
 val dark = Color(0xFF202020)
-val grey = Color(0xFFDDDDDD)
+val violet = Color(0xFF5B3FBF)
+val softViolet = Color(0xFFF1EEFC)
+val line = Color(0xFFCFC5F2)
+val good = Color(0xFF1F7A3D)
+val bad = Color(0xFFC62828)
 
 data class Question(val text: String, val answer: Boolean, val why: String)
 
@@ -65,14 +68,14 @@ class MainActivity : ComponentActivity() {
         setContent {
             MaterialTheme(
                 colorScheme = lightColorScheme(
-                    primary = dark,
+                    primary = violet,
                     onPrimary = Color.White,
-                    background = Color.White,
+                    background = softViolet,
                     onBackground = dark,
                     surface = Color.White,
                     onSurface = dark,
                     onSurfaceVariant = dark,
-                    outline = grey
+                    outline = line
                 )
             ) {
                 QuizApp()
@@ -165,7 +168,7 @@ fun QuizApp() {
                         Row(modifier = Modifier.fillMaxWidth()) {
                             Text("Question ${current + 1} / ${questions.size}",
                                 modifier = Modifier.weight(1f))
-                            Text("$score points", fontWeight = FontWeight.Bold)
+                            Text("$score points", color = violet, fontWeight = FontWeight.Bold)
                         }
 
                         var done = current
@@ -173,12 +176,12 @@ fun QuizApp() {
                         LinearProgressIndicator(
                             progress = { done.toFloat() / questions.size },
                             modifier = Modifier.fillMaxWidth(),
-                            color = dark,
-                            trackColor = grey
+                            color = violet,
+                            trackColor = line
                         )
 
                         QuizCard {
-                            Text("HACK OR MYTH?", style = MaterialTheme.typography.labelMedium)
+                            Text("HACK OR MYTH?", color = violet, style = MaterialTheme.typography.labelMedium)
                             Heading(q.text)
                         }
 
@@ -241,7 +244,7 @@ fun QuizApp() {
                             QuizCard {
                                 Text("Question ${pos + 1}", style = MaterialTheme.typography.labelLarge)
                                 Text(q.text, style = MaterialTheme.typography.titleMedium)
-                                HorizontalDivider(color = grey)
+                                HorizontalDivider(color = line)
                                 Result(q, answers[qIndex])
                             }
                         }
@@ -264,7 +267,7 @@ fun QuizCard(content: @Composable ColumnScope.() -> Unit) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
-        border = BorderStroke(1.dp, grey),
+        border = BorderStroke(1.dp, line),
         colors = CardDefaults.cardColors(containerColor = Color.White)
     ) {
         Column(
@@ -290,11 +293,11 @@ fun QuizButton(
         enabled = enabled,
         modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp),
         shape = RoundedCornerShape(12.dp),
-        border = if (filled) null else BorderStroke(1.dp, grey),
+        border = if (filled) null else BorderStroke(1.dp, line),
         colors = ButtonDefaults.buttonColors(
-            containerColor = if (filled) dark else Color.White,
+            containerColor = if (filled) violet else Color.White,
             contentColor = if (filled) Color.White else dark,
-            disabledContainerColor = if (selected) dark else Color.White,
+            disabledContainerColor = if (selected) violet else Color.White,
             disabledContentColor = if (selected) Color.White else dark
         )
     ) {
@@ -308,6 +311,7 @@ fun Result(q: Question, picked: Int) {
 
     Text(
         if (picked == -1) "Not answered" else if (right) "Correct!" else "Wrong!",
+        color = if (picked == -1) dark else if (right) good else bad,
         style = MaterialTheme.typography.titleMedium,
         fontWeight = FontWeight.Bold
     )
@@ -318,23 +322,4 @@ fun Result(q: Question, picked: Int) {
 
 fun label(isTrue: Boolean): String {
     return if (isTrue) "Hack (True)" else "Myth (False)"
-}
-
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-fun QuizPreview() {
-    MaterialTheme(
-        colorScheme = lightColorScheme(
-            primary = dark,
-            onPrimary = Color.White,
-            background = Color.White,
-            onBackground = dark,
-            surface = Color.White,
-            onSurface = dark,
-            onSurfaceVariant = dark,
-            outline = grey
-        )
-    ) {
-        QuizApp()
-    }
 }
